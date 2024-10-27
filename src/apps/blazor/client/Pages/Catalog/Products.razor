@@ -26,6 +26,24 @@
         <MudItem xs="12" md="6">
             <MudTextField Label="Price" For="@(() => context.Price)" @bind-Value="context.Price" />
         </MudItem>
+        <MudItem xs="12" md="6">
+
+            @if (!string.IsNullOrEmpty(context.ImagePath.Name))
+            {
+                <MudAvatar Style=" width:100%;height:auto;border-radius:0px!important;">
+                    <MudImage Src="@context.ImagePath.Name"></MudImage>
+                </MudAvatar>
+            }
+            
+
+              <InputFile id="fileInput" OnChange="UploadFiles" hidden accept=".jpg,.jpeg,.png" />
+                <div style="padding-bottom:20px">
+                    <MudButton DropShadow="false" HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small"
+                               StartIcon="@Icons.Material.Filled.CloudUpload" for="fileInput">
+                    Upload Picture
+                </MudButton>
+                </div>
+        </MudItem>
         <MudItem xs="12" md="12">
             <MudItem>
                 <div>
@@ -44,6 +62,7 @@
                 </div>
             </MudItem>
         </MudItem>
+      
     </EditFormContent>
 
 </EntityTable>

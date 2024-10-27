@@ -20,7 +20,7 @@ public sealed class GetProductHandler(
             {
                 var productItem = await repository.GetByIdAsync(request.Id, cancellationToken);
                 if (productItem == null) throw new ProductNotFoundException(request.Id);
-                return new ProductResponse(productItem.Id, productItem.Name, productItem.Description, productItem.Price);
+                return new ProductResponse(productItem.Id, productItem.Name, productItem.Description, productItem.Price, productItem.ImagePath);
             },
             cancellationToken: cancellationToken);
         return item!;
