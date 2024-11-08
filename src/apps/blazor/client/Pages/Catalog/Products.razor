@@ -28,12 +28,12 @@
         </MudItem>
         <MudItem xs="12" md="6">
 
-            @if (!string.IsNullOrEmpty(context.ImagePath.Name))
+           @*  @if (!string.IsNullOrEmpty(context.ImagePath))
             {
                 <MudAvatar Style=" width:100%;height:auto;border-radius:0px!important;">
-                    <MudImage Src="@context.ImagePath.Name"></MudImage>
+                    <MudImage Src="@context.imagePath"></MudImage>
                 </MudAvatar>
-            }
+            } *@
             
 
               <InputFile id="fileInput" OnChange="UploadFiles" hidden accept=".jpg,.jpeg,.png" />

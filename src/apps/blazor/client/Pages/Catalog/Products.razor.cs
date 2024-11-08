@@ -111,7 +111,7 @@ public partial class Products
 
 public class ProductViewModel : UpdateProductCommand
 {
-        public string? Image { get; set; }
+    //    public string? Image { get; set; }
     //    public string? imageinbytes { get; set; }
     //    public string? imageextension { get; set; }
 }

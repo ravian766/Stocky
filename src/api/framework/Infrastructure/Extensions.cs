@@ -23,23 +23,40 @@ using FSH.Framework.Infrastructure.Tenant.Endpoints;
 using FSH.Starter.Aspire.ServiceDefaults;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Hosting;
 
 namespace FSH.Framework.Infrastructure;
 
 public static class Extensions
 {
+    private const string CorsPolicy = nameof(CorsPolicy);
     public static WebApplicationBuilder ConfigureFshFramework(this WebApplicationBuilder builder)
     {
+        
         ArgumentNullException.ThrowIfNull(builder);
         builder.AddServiceDefaults();
         builder.ConfigureSerilog();
         builder.ConfigureDatabase();
         builder.Services.ConfigureMultitenancy();
         builder.Services.ConfigureIdentity();
-        builder.Services.AddCorsPolicy(builder.Configuration);
+        if (!builder.Environment.IsDevelopment())
+        {
+            builder.Services.AddCorsPolicy(builder.Configuration);
+        }
+        else {
+            builder.Services.AddCors(opt =>
+            opt.AddPolicy(CorsPolicy, policy =>
+            policy.AllowAnyHeader()
+                .AllowAnyMethod()
+                //// .AllowCredentials()
+                //// .WithOrigins(corsOptions.AllowedOrigins.ToArray())));
+                .AllowAnyOrigin()));
+        }
+
         builder.Services.ConfigureFileStorage();
         builder.Services.ConfigureJwtAuth();
         builder.Services.ConfigureOpenApi();
