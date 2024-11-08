@@ -21,15 +21,17 @@ public sealed class UpdateProductHandler(
         _ = product ?? throw new ProductNotFoundException(request.Id);
 
         Uri imageUri = null!;
-        // if (request.Image != null || request.DeleteCurrentImage)
-        // {
-        //user.ImageUrl = await storageService.UploadAsync<Product>(request.ImagePath, FileType.Image);
-        imageUri = await storageService.UploadAsync<Product>(request.ImagePath, FileType.Image);
-        //if (request.DeleteCurrentImage && imageUri != null)
-        //{
-        //    storageService.Remove(imageUri);
-        //}
-        // }
+        //// if (request.Image != null || request.DeleteCurrentImage)
+        if (request.Image != null)
+        {
+           ////user.ImageUrl = await storageService.UploadAsync<Product>(request.ImagePath, FileType.Image);
+            imageUri = await storageService.UploadAsync<Product>(request.Image, FileType.Image, cancellationToken);
+            ////  if (request.DeleteCurrentImage && imageUri != null)
+            if (product.ImagePath != null)
+            {
+                storageService.Remove(product.ImagePath);
+            }
+        }
 
         var updatedProduct = product.Update(request.Name, request.Description, request.Price, imageUri);
         await repository.UpdateAsync(updatedProduct, cancellationToken);

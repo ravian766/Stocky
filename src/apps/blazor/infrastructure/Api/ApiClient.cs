@@ -4860,8 +4860,8 @@ namespace FSH.Starter.Blazor.Infrastructure.Api
         [System.Text.Json.Serialization.JsonPropertyName("price")]
         public double Price { get; set; } = 10D;
 
-        [System.Text.Json.Serialization.JsonPropertyName("imagePath")]
-        public FileUploadCommand? ImagePath { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonPropertyName("image")]
+        public FileUploadCommand Image { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("description")]
         public string? Description { get; set; } = "Descriptive Description";
@@ -5328,8 +5328,8 @@ namespace FSH.Starter.Blazor.Infrastructure.Api
         [System.Text.Json.Serialization.JsonPropertyName("price")]
         public double Price { get; set; } = default!;
 
-        [System.Text.Json.Serialization.JsonPropertyName("imagePath")]
-        public FileUploadCommand? ImagePath { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonPropertyName("image")]
+        public FileUploadCommand Image { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("description")]
         public string? Description { get; set; } = default!;

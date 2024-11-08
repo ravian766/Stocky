@@ -18,15 +18,15 @@ public sealed class CreateProductHandler(
         ArgumentNullException.ThrowIfNull(request);
 
         Uri imageUri = null; //request.ImagePath ?? null!;
-       // if (request.Image != null || request.DeleteCurrentImage)
-       // {
-            //user.ImageUrl = await storageService.UploadAsync<Product>(request.ImagePath, FileType.Image);
-            imageUri = await storageService.UploadAsync<Product>(request.ImagePath, FileType.Image);
-            //if (request.DeleteCurrentImage && imageUri != null)
-            //{
-            //    storageService.Remove(imageUri);
-            //}
-       // }
+        //// if (request.Image != null || request.DeleteCurrentImage)
+        //// {
+        ////user.ImageUrl = await storageService.UploadAsync<Product>(request.ImagePath, FileType.Image);
+        imageUri = await storageService.UploadAsync<Product>(request.Image, FileType.Image, cancellationToken);
+        ////if (request.DeleteCurrentImage && imageUri != null)
+        ////{
+        ////    storageService.Remove(imageUri);
+        ////}
+        //// }
 
         var product = Product.Create(request.Name!, request.Description, request.Price, imageUri);
         await repository.AddAsync(product, cancellationToken);

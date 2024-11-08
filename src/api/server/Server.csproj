@@ -33,4 +33,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="assets\images\Product\" />
+  </ItemGroup>
 </Project>

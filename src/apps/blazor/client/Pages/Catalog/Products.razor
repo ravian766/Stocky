@@ -26,16 +26,18 @@
         <MudItem xs="12" md="6">
             <MudTextField Label="Price" For="@(() => context.Price)" @bind-Value="context.Price" />
         </MudItem>
-        <MudItem xs="12" md="6">
-
-           @*  @if (!string.IsNullOrEmpty(context.ImagePath))
+         <MudItem>
+            @if (!string.IsNullOrEmpty(context.ImageInBytes))
             {
-                <MudAvatar Style=" width:100%;height:auto;border-radius:0px!important;">
-                    <MudImage Src="@context.imagePath"></MudImage>
-                </MudAvatar>
-            } *@
-            
-
+                <MudImage Src="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudImage>
+            }
+            else
+            {
+                <MudImage Src="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (@context.ImagePath))" Style="height: auto; width: auto; max-height: 100%"></MudImage>
+                @* <MudAvatar Image="@(string.IsNullOrEmpty(@context.ImagePath) ? string.Empty : (@context.ImagePath))" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar> *@
+            }
+        </MudItem>
+        <MudItem xs="12" md="6">
               <InputFile id="fileInput" OnChange="UploadFiles" hidden accept=".jpg,.jpeg,.png" />
                 <div style="padding-bottom:20px">
                     <MudButton DropShadow="false" HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small"
@@ -50,7 +52,7 @@
                     @if(!Context.AddEditModal.IsCreate)
                     {
                         <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
-                            StartIcon="@Icons.Material.Filled.RemoveRedEye" Style="margin-left: 5px;" >
+                                   StartIcon="@Icons.Material.Filled.RemoveRedEye" Href="@context.ImagePath" Style="margin-left: 5px;">
                             View
                         </MudButton>
 

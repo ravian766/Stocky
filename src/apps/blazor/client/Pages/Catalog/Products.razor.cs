@@ -24,11 +24,12 @@ public partial class Products
             entityResource: FshResources.Products,
             fields: new()
             {
+                new(prod => prod.ImagePath,  "", "ImagePath", typeof(MudAvatar)),
                 new(prod => prod.Id,"Id", "Id"),
                 new(prod => prod.Name,"Name", "Name"),
                 new(prod => prod.Description, "Description", "Description"),
                 new(prod => prod.Price, "Price", "Price")
-               // new(prod => prod.ImagePath, "ImagePath", "ImagePath")
+               
             },
             enableAdvancedSearch: true,
             idFunc: prod => prod.Id!.Value,
@@ -102,16 +103,18 @@ public partial class Products
             byte[]? buffer = new byte[imageFile.Size];
             await imageFile.OpenReadStream(AppConstants.MaxAllowedSize).ReadAsync(buffer);
             string? base64String = $"data:{AppConstants.StandardImageFormat};base64,{Convert.ToBase64String(buffer)}";
-            Context.AddEditModal.RequestModel.ImagePath = new FileUploadCommand() { Name = fileName, Data = base64String, Extension = extension };
+            Context.AddEditModal.RequestModel.ImageInBytes = base64String;
+            Context.AddEditModal.RequestModel.Image = new FileUploadCommand() { Name = fileName, Data = base64String, Extension = extension };
+            Context.AddEditModal.ForceRender();
 
-            //await UpdateProfileAsync();
+
         }
     }
 }
 
 public class ProductViewModel : UpdateProductCommand
 {
-    //    public string? Image { get; set; }
-    //    public string? imageinbytes { get; set; }
-    //    public string? imageextension { get; set; }
+    public string? ImagePath { get; set; }
+    public string? ImageInBytes { get; set; }
+    public string? ImageExtension { get; set; }
 }

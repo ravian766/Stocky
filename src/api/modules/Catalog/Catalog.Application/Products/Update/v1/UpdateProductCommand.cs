@@ -6,5 +6,5 @@ public sealed record UpdateProductCommand(
     Guid Id,
     string? Name,
     decimal Price,
-    FileUploadCommand? ImagePath,
+    FileUploadCommand? Image,
     string? Description = null) : IRequest<UpdateProductResponse>;

@@ -92,6 +92,13 @@
                         {
                             @field.Template(context)
                         }
+                        else if (field.Type == typeof(MudAvatar))
+                        {
+                            @* <MudAvatar Image="@field.ValueFunc(context)?.ToString()" Square="true" Style="height: auto; width: 100px; max-height: 100%"> </MudAvatar> *@
+                            <MudAvatar Style=" width:100px;height:auto;border-radius:0px!important;">
+                                <MudImage Src="@field.ValueFunc(context)?.ToString()"></MudImage>
+                            </MudAvatar>
+                        }
                         else if (field.Type == typeof(bool))
                         {
                             <MudCheckBox T="bool" Value="GetBooleanValue(field.ValueFunc(context))" ReadOnly Color="Color.Secondary"></MudCheckBox>
